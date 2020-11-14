@@ -1,0 +1,27 @@
+﻿<Window x:Class="BoardGameDesigner.DesktopApp.Windows.CardViewer.CardViewerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoardGameDesigner.DesktopApp.Windows.CardViewer"
+        mc:Ignorable="d"
+        Title="Podgląd kart" ResizeMode="NoResize" Height="833" Width="520" d:DesignHeight="803" d:DesignWidth="520">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0" Height="803" Width="520" x:Name="CardCanvas">
+            <Rectangle Height="30" Width="520" Fill="Gray" Canvas.Left="0" Canvas.Top="0">
+
+            </Rectangle>
+
+            <Rectangle Canvas.Bottom="45" Height="30" Canvas.Left="0" Width="520" Fill="Blue"></Rectangle>
+            <Grid Width="{Binding ActualWidth, ElementName=CardCanvas}" Height="{Binding ActualHeight, ElementName=CardCanvas}">
+                <Label Content="Nazwa karty" HorizontalAlignment="Center"/>
+            </Grid>
+        </Canvas>
+        <Button Height="30" Grid.Row="1" Content="Export to PNG" Click="ExportToPng"/>
+    </Grid>
+   
+</Window>

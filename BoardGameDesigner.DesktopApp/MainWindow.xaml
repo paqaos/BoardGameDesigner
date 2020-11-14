@@ -1,0 +1,39 @@
+﻿<Window x:Class="BoardGameDesigner.DesktopApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoardGameDesigner.DesktopApp"
+        xmlns:controls="clr-namespace:BoardGameDesigner.DesktopApp.Controls"
+        xmlns:projectSettings="clr-namespace:BoardGameDesigner.DesktopApp.Controls.ProjectSettings"
+        mc:Ignorable="d"
+        Title="Board game designer" Height="450" Width="800">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" DataContext="{Binding ProjectManagementVm}">
+            <MenuItem Header="_File">
+                <MenuItem Header="_New" Name="CreateNewProjectBtn" Command="{Binding CreateProjectCommand}"></MenuItem>
+
+                <MenuItem Header="_Load" Name="LoadProjectBtn" Command="{Binding LoadProjectCommand}"></MenuItem>
+                <MenuItem Header="_Save" Command="{Binding SaveProjectCommand}"></MenuItem>
+                <Separator/>
+                <MenuItem Header="_Close"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Edit">
+                <MenuItem Header="Settings" ></MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Help"></MenuItem>
+        </Menu>
+        <TabControl>
+            <TabItem Header="Project settings">
+                <projectSettings:ProjectManagement DataContext="{Binding ProjectSettingsVm}"/>
+            </TabItem>
+            <TabItem Header="Game metadata">
+
+            </TabItem>
+            <TabItem Header="Cards">
+                <controls:CardController x:Name="CardController"/>
+            </TabItem>
+        </TabControl>
+
+    </DockPanel>
+</Window>
