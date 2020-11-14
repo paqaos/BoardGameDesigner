@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BoardGameDesigner.DesktopApp"
         xmlns:controls="clr-namespace:BoardGameDesigner.DesktopApp.Controls"
         xmlns:projectSettings="clr-namespace:BoardGameDesigner.DesktopApp.Controls.ProjectSettings"
+        xmlns:metadata="clr-namespace:BoardGameDesigner.DesktopApp.Controls.Metadata"
         mc:Ignorable="d"
         Title="Board game designer" Height="450" Width="800">
     <DockPanel>
@@ -28,7 +29,7 @@
                 <projectSettings:ProjectManagement DataContext="{Binding ProjectSettingsVm}"/>
             </TabItem>
             <TabItem Header="Game metadata">
-
+                <metadata:MetadataPreviewControl DataContext="{Binding MetadataVm}"/>
             </TabItem>
             <TabItem Header="Cards">
                 <controls:CardController x:Name="CardController"/>

@@ -50,5 +50,10 @@ namespace BoardGameDesigner.BusinessLayer.Services
 
             OnGameChanged?.Invoke(this, new GameChanged());
         }
+
+        public void Init()
+        {
+            OnGameChanged?.Invoke(this, new GameChanged());
+        }
     }
 }

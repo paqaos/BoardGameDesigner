@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows;
 using AutoMapper;
 using BoardGameDesigner.BusinessLayer.Commands;
+using BoardGameDesigner.BusinessLayer.Commands.GameMetadata;
 using BoardGameDesigner.BusinessLayer.Commands.ProjectMetadata;
 using BoardGameDesigner.BusinessLayer.DataSources;
 using BoardGameDesigner.BusinessLayer.External;
@@ -20,9 +21,11 @@ using BoardGameDesigner.Model.Design;
 using BoardGameDesigner.Model.Design.Metatada;
 using BoardGameDesigner.ViewModel;
 using BoardGameDesigner.ViewModel.Commands;
+using BoardGameDesigner.ViewModel.Commands.GameMetadata;
 using BoardGameDesigner.ViewModel.Commands.ProjectMetadata;
 using BoardGameDesigner.ViewModel.DataSources;
 using BoardGameDesigner.ViewModel.Main;
+using BoardGameDesigner.ViewModel.Metadata;
 using BoardGameDesigner.ViewModel.ProjectManagement;
 using SimpleInjector;
 
@@ -47,6 +50,8 @@ namespace BoardGameDesigner.DesktopApp.Management
             container.RegisterSingleton<ProjectManagementViewModel>();
             container.RegisterSingleton<GameDetailsViewModel>();
             container.RegisterSingleton<ProjectSettingsViewModel>();
+            container.RegisterSingleton<MetadataViewModel>();
+            container.RegisterSingleton<MetadataGroupViewModel>();
 
 #region Project management
             container.RegisterSingleton<ICreateProjectCommand, CreateProjectCommand>();
@@ -57,6 +62,7 @@ namespace BoardGameDesigner.DesktopApp.Management
             container.RegisterSingleton<ICreateCardCommand, CreateCardCommand>();
             container.RegisterSingleton<ISaveCardCommand, SaveCardCommand>();
             container.RegisterSingleton<ISaveProjectCommand, SaveProjectCommand>();
+            container.RegisterSingleton<IAddMetadataGroupCommand, AddMetadataGroupCommand>();
 
             container.RegisterSingleton<IFilePicker, FilePicker>();
             container.RegisterSingleton<ICardDesignGenerator, CardDesignGenerator>();
@@ -110,6 +116,11 @@ namespace BoardGameDesigner.DesktopApp.Management
                 {
                     Name = "Card name"
                 });
+            });
+
+            container.RegisterInitializer<GameStateService>(x =>
+            {
+                x.Init();
             });
 
             container.Verify();

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Input;
 using AutoMapper;
 using BoardGameDesigner.Model.Components;
 using BoardGameDesigner.Model.Events;
@@ -10,7 +8,6 @@ using BoardGameDesigner.Model.Events.CardEvents;
 using BoardGameDesigner.ViewModel.Commands;
 using BoardGameDesigner.ViewModel.Commands.ProjectMetadata;
 using BoardGameDesigner.ViewModel.DataSources;
-using BoardGameDesigner.ViewModel.ProjectManagement;
 
 namespace BoardGameDesigner.ViewModel
 {
@@ -21,13 +18,10 @@ namespace BoardGameDesigner.ViewModel
         public ICreateCardCommand CreateCardCommand { get; set; }
         public ISaveCardCommand SaveCardCommand { get; set; }
 
-        public ProjectManagementViewModel ProjectManagementViewModel { get; set; }
-        public ProjectSettingsViewModel ProjectSettingsViewModel { get; set; }
-
         private IDataSource<Card> _cardDataSource;
         private readonly IMapper _mapper;
 
-        public GameDetailsViewModel(ILoadProjectCommand loadProjectCommand, IPreviewCardCommand previewCardCommand, ICreateCardCommand createCardCommand, IDataSource<Card> cardDataSource, ISaveCardCommand saveCardCommand, IMapper mapper, ProjectManagementViewModel projectManagementViewModel, ProjectSettingsViewModel projectSettingsViewModel)
+        public GameDetailsViewModel(ILoadProjectCommand loadProjectCommand, IPreviewCardCommand previewCardCommand, ICreateCardCommand createCardCommand, IDataSource<Card> cardDataSource, ISaveCardCommand saveCardCommand, IMapper mapper)
         {
             LoadProjectCommand = loadProjectCommand;
             PreviewCardCommand = previewCardCommand;
@@ -35,8 +29,6 @@ namespace BoardGameDesigner.ViewModel
             _cardDataSource = cardDataSource;
             SaveCardCommand = saveCardCommand;
             _mapper = mapper;
-            ProjectManagementViewModel = projectManagementViewModel;
-            ProjectSettingsViewModel = projectSettingsViewModel;
             CardsInFamily = new ObservableCollection<CardViewModel>(new List<CardViewModel>());
 
             _cardDataSource.ComponentCreated += AddNewCard;
@@ -55,11 +47,7 @@ namespace BoardGameDesigner.ViewModel
             new CardFamilyViewModel()
         };
 
-        private static List<CardViewModel> Cards = new List<CardViewModel>();
-
         private CardFamilyViewModel _selectedCardFamily;
-
-        public ObservableCollection<CardFamilyViewModel> CardFamilies { get; } = new ObservableCollection<CardFamilyViewModel>(CardsFamiliesSource);
 
         public CardFamilyViewModel SelectedCardFamily
         {
